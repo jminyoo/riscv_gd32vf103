@@ -1,3 +1,5 @@
 *.o
 *.a
 firmware*
+cscope*
+*tags*
