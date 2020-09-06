@@ -37,6 +37,8 @@ OF SUCH DAMAGE.
 #include "systick.h"
 #include <stdio.h>
 
+#include "gd32vf103_usart.h"
+
 /*!
     \brief      main function
     \param[in]  none
@@ -45,27 +47,23 @@ OF SUCH DAMAGE.
 */
 int main(void)
 {
-    gd_eval_led_init(LED1);
-    gd_eval_led_init(LED2);
-    gd_eval_led_init(LED3);
-    gd_eval_led_init(LED4);
+    gd_eval_com_init(EVAL_COM0);
 
+    usart_data_transmit(USART0, (uint32_t)'h');
+    while (usart_flag_get(USART0, USART_FLAG_TBE) == RESET) {}
+
+    usart_data_transmit(USART0, (uint32_t)'e');
+    while (usart_flag_get(USART0, USART_FLAG_TBE) == RESET) {}
+
+    usart_data_transmit(USART0, (uint32_t)'l');
+    while (usart_flag_get(USART0, USART_FLAG_TBE) == RESET) {}
+
+    usart_data_transmit(USART0, (uint32_t)'l');
+    while (usart_flag_get(USART0, USART_FLAG_TBE) == RESET) {}
+
+    usart_data_transmit(USART0, (uint32_t)'o');
+    while (usart_flag_get(USART0, USART_FLAG_TBE) == RESET) {}
+		    
     while(1){
-        /* turn on led1, turn off led4 */
-        gd_eval_led_on(LED1);
-        gd_eval_led_off(LED4);
-        delay_1ms(1000);
-        /* turn on led2, turn off led1 */
-        gd_eval_led_on(LED2);
-        gd_eval_led_off(LED1);
-        delay_1ms(1000);
-        /* turn on led3, turn off led2 */
-        gd_eval_led_on(LED3);
-        gd_eval_led_off(LED2);
-        delay_1ms(1000);
-        /* turn on led4, turn off led3 */
-        gd_eval_led_on(LED4);
-        gd_eval_led_off(LED3);
-        delay_1ms(1000);
     }
 }

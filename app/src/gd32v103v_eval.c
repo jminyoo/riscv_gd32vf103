@@ -243,4 +243,6 @@ void gd_eval_com_init(uint32_t com)
     usart_receive_config(com, USART_RECEIVE_ENABLE);
     usart_transmit_config(com, USART_TRANSMIT_ENABLE);
     usart_enable(com);
+
+    usart_interrupt_enable(com, USART_INT_RBNE);
 }
